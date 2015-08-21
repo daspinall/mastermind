@@ -13,29 +13,31 @@ def mastermind():
 	
 	#Establish how difficult the user wants the game
 	while True:
-		if lower(difficulty) == "easy":
+		if difficulty.lower() == "easy":
 			guess_limit = 20
 			break
-		elif lower(difficulty) == "intermediate":
+		elif difficulty.lower() == "intermediate":
 			guess_limit = 15
 			break
-		elif lower(difficulty) == "hard":
+		elif difficulty.lower() == "hard":
 			guess_limit = 10
 			break
 		else:
 			difficulty = raw_input("Enter again? Easy, intermediate, or Hard?")
 
 	#Red, green, blue, yellow, orange, or purple
-	possible_colors = [r, g, b, y, o, p]
+	possible_colors = ["r", "g", "b", "y", "o", "p"]
 
 	#Create the random master code
 	master_code = []
-	for color in range(5):
-		master_code[color] = possible_colors[randint(0, 5)]
+	for color in range(0, 5):
+		master_code.insert(color, possible_colors[randint(0, 5)])
+
+	print master_code 
 
 	#While the user still has guesses left, let them guess!
 	while guesses_made < guess_limit:
-		guess = raw_input("Make your guess! ")
+		guess = raw_input("Make your guess of five colors! ")
 
 		guess_list = [c for c in guess]
 
@@ -52,7 +54,7 @@ def mastermind():
 			if guess_list[index] == master_code[index]:
 				output += "Exact!" + "\n"
 				exact_colors += 1
-			elif color is in master_code:
+			elif color in master_code:
 				output += "Somewhere else!" + "\n"
 			else:
 				output += "Nope!" + "\n"
@@ -61,12 +63,12 @@ def mastermind():
 
 		#Print the output if the exact code is guessed
 		if exact_colors == 5:
-			output = "Congratulations! You found the solution!"
+			output = "Congratulations! You beat the mastermind!"
 			print output
 			break
 
 		#If they didn't get it right, show them the hints
 		print output
 
-
+mastermind()
 
