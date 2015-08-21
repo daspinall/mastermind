@@ -41,14 +41,32 @@ def mastermind():
 
 		output = ""
 
+		#Keeps track of where in the list we are and how many exact colors are guessed
 		index = 0
+		exact_colors = 0
 		for color in guess_list:
 
 			output += "Position " + str(index + 1) + ": "
 
+			#Three outputs possible per color: in the exact place, 
 			if guess_list[index] == master_code[index]:
-				output += "Exact!"
+				output += "Exact!" + "\n"
+				exact_colors += 1
 			elif color is in master_code:
 				output += "Somewhere else!" + "\n"
+			else:
+				output += "Nope!" + "\n"
+
+			index += 1
+
+		#Print the output if the exact code is guessed
+		if exact_colors == 5:
+			output = "Congratulations! You found the solution!"
+			print output
+			break
+
+		#If they didn't get it right, show them the hints
+		print output
+
 
 
